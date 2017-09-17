@@ -11,9 +11,9 @@ type req_struct struct {
 }
 
 func rootHandler(w http.ResponseWriter, req *http.Request) {
-	decoder := json.NewDecoder(req.Body)
-	w.Header().Set("Content-Type", "application/json")
-	var r req_struct
+    decoder := json.NewDecoder(req.Body)
+    w.Header().Set("Content-Type", "application/json")
+    var r req_struct
     err := decoder.Decode(&r)
     if err != nil {
         panic(err)
