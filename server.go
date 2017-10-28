@@ -1,4 +1,4 @@
-package main
+package failover
 
 import (
 	"log"
@@ -10,7 +10,7 @@ type req_struct struct {
     Time string
 }
 
-func rootHandler(w http.ResponseWriter, req *http.Request) {
+func RootHandler(w http.ResponseWriter, req *http.Request) {
     decoder := json.NewDecoder(req.Body)
     w.Header().Set("Content-Type", "application/json")
     var r req_struct
@@ -20,9 +20,5 @@ func rootHandler(w http.ResponseWriter, req *http.Request) {
     }
     defer req.Body.Close()
     log.Println(r.Time)
-}
-
-func main() {
-	http.HandleFunc("/", rootHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+    log.Println(GetKey())
 }
